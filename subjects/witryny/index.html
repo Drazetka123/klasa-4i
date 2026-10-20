@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pl" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080d17">
+  <meta name="description" content="Klasa 4i · Witryny LAB: praktyczny kurs technologii webowych. 23 lekcje, fiszki, quizy, trening kodowania, statystyki i powtórki.">
+  <meta property="og:title" content="Witryny LAB — ucz się tworzyć strony">
+  <meta property="og:description" content="Darmowy, interaktywny kurs WWW, HTML, CSS, JavaScript, UX, PHP i bezpieczeństwa. Działa offline.">
+  <meta property="og:type" content="website">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="../../assets/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../../manifest.webmanifest">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/extra.css">
+  <title>Witryny internetowe — Klasa 4i</title>
+  <script src="js/data.js" defer></script>
+  <script src="js/labs.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <script src="js/pwa.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#app">Przejdź do treści</a>
+<div class="layout">
+  <aside class="sidebar" aria-label="Panel nawigacyjny">
+    <a class="brand" href="../../" aria-label="Powrót do wyboru przedmiotu — klasa 4i">
+      <span class="brand-mark">W</span><span class="brand-name">WITRYNY LAB<small>Learn the web</small></span>
+    </a>
+    <a class="course-back" href="../../"><span aria-hidden="true">←</span> Wszystkie przedmioty</a>
+    <div class="nav-caption">WITRYNY INTERNETOWE</div>
+    <nav id="sideNav" aria-label="Główna nawigacja"></nav>
+    <div class="sidebar-bottom">
+      <div id="sideProgress" class="side-progress"></div>
+      <div class="side-footer">✓ Bez konta i reklam<br>✓ Postępy zapisane lokalnie</div>
+    </div>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <a class="course-mobile-back" href="../../" aria-label="Wróć do listy przedmiotów">← <span>Przedmioty</span></a>
+      <div class="crumb" id="breadcrumb">4i / Witryny / Pulpit</div>
+      <div class="top-actions">
+        <span class="top-status" id="networkStatus" aria-live="polite"><i></i> Zapis lokalny</span>
+        <button id="openSearch" class="search-trigger" aria-label="Otwórz wyszukiwarkę">
+          <span aria-hidden="true">⌕</span><span>Szukaj w kursie...</span><span class="kbd">Ctrl K</span>
+        </button>
+        <button id="themeBtn" class="icon-btn" title="Zmień motyw" aria-label="Zmień motyw">☼</button>
+        <button id="settingsBtn" class="icon-btn" data-nav="settings" title="Ustawienia" aria-label="Ustawienia">⚙</button>
+      </div>
+    </header>
+    <main id="app" class="content" tabindex="-1"></main>
+    <footer class="site-footer"><a href="../../">Klasa 4i</a> <span>·</span> Witryny LAB <span>·</span> Materiał oparty na notatkach „witryny_ai.pdf" <span>·</span> Wszystkie dane zostają w Twojej przeglądarce.</footer>
+  </div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Nawigacja mobilna"></nav>
+</div>
+<noscript><div class="noscript">Do działania lekcji i ćwiczeń potrzebny jest JavaScript. Włącz go w ustawieniach przeglądarki.</div></noscript>
+</body>
+</html>

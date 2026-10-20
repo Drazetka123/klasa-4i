@@ -1,0 +1,40 @@
+/** Prosty, współdzielony silnik przyszłych przedmiotów. */
+(() => {
+  'use strict';
+  const course = window.CLASS4I_COURSE;
+  if (!course || !Array.isArray(course.lessons)) {
+    document.getElementById('courseMain').textContent = 'Brakuje treści przedmiotu (data.js).';
+    return;
+  }
+  const modules=Array.isArray(course.modules)?course.modules:[];
+  const lessons=course.lessons;
+  const cards=Array.isArray(course.flashcards)?course.flashcards:[];
+  const questions=Array.isArray(course.questions)?course.questions:[];
+  const key=course.storageKey || `klasa4i-${course.id}-v1`;
+  const escape = value => String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const $ = selector => document.querySelector(selector);
+  const defaults = {completed:{},notes:{},quizAnswers:{}};
+  let state=defaults;
+  try {const parsed=JSON.parse(localStorage.getItem(key)||'{}'); state={...defaults,...parsed,completed:parsed.completed||{},notes:parsed.notes||{},quizAnswers:parsed.quizAnswers||{}};}catch{}
+  const save=()=>{try{localStorage.setItem(key,JSON.stringify(state))}catch{}};
+  let flashIndex=0,flipped=false,quizIndex=0;
+  const done=()=>lessons.filter(l=>state.completed[l.id]).length;
+  const progress=()=>lessons.length?Math.round(done()/lessons.length*100):0;
+  const route=()=>{const parts=(location.hash||'#/start').slice(2).split('/');return {page:parts[0]||'start',id:parts[1]||''}};
+  const heading=(k,title,sub)=>`<div class="heading"><small>${escape(k)}</small><h1>${escape(title)}</h1><p>${escape(sub)}</p></div>`;
+  const lessonLink=(l,index)=>`<a href="#/lesson/${encodeURIComponent(l.id)}" class="lesson-row"><span class="lesson-index">${String(index+1).padStart(2,'0')}</span><span><strong>${escape(l.title)}</strong><small>${escape(l.summary||'')} · ${Number(l.duration)||5} min</small></span><b>${state.completed[l.id]?'✓':'→'}</b></a>`;
+  function start(){const next=lessons.find(l=>!state.completed[l.id])||lessons[0];return `<div class="banner">${heading('KLASA 4I · WYBRANY PRZEDMIOT',course.title,course.subtitle||'')}<a href="${next?`#/lesson/${encodeURIComponent(next.id)}`:'#/lessons'}" class="cta">${done()?'Kontynuuj lekcję':'Rozpocznij naukę'} ↗</a></div><div class="numbers"><div><strong>${lessons.length}</strong><span>Lekcje</span></div><div><strong>${cards.length}</strong><span>Fiszki</span></div><div><strong>${questions.length}</strong><span>Pytania</span></div><div><strong>${progress()}%</strong><span>Postęp</span></div></div><div class="section-label">POCZĄTEK TWOJEJ NAUKI</div><h2>Wybierz lekcję</h2><div class="listing">${lessons.slice(0,5).map(lessonLink).join('')||'<p>Dodaj pierwsze lekcje w data.js.</p>'}</div>`;}
+  function allLessons(){return `${heading('MATERIAŁ DO PRZEROBIENIA','Wszystkie lekcje','Wybierz zagadnienie, które chcesz opanować.')}${modules.length?modules.map(m=>`<div class="section-label">${escape(m.title)}</div><div class="listing">${lessons.filter(l=>l.module===m.id).map(l=>lessonLink(l,lessons.indexOf(l))).join('')||'<p>Brak lekcji w tym dziale.</p>'}</div>`).join(''):`<div class="listing">${lessons.map(lessonLink).join('')}</div>`}`;}
+  function article(id){const l=lessons.find(l=>l.id===decodeURIComponent(id));if(!l)return `${heading('NIE ZNALEZIONO','Nie ma takiej lekcji','Wróć do listy lekcji.')}<a class="cta" href="#/lessons">Zobacz lekcje</a>`;const idx=lessons.indexOf(l);return `<a href="#/lessons" class="back-inline">← Wszystkie lekcje</a><article class="article">${heading(`LEKCJA ${idx+1} / ${lessons.length} · ${Number(l.duration)||5} MIN`,l.title,l.summary||'')}${(l.sections||[]).map(s=>`<section><h2>${escape(s.heading)}</h2><p>${escape(s.text)}</p></section>`).join('')}<div class="notes"><label for="note">Twoje notatki</label><textarea id="note" data-note="${escape(l.id)}" rows="4" placeholder="Zapisz własne skojarzenia i ważne informacje...">${escape(state.notes[l.id]||'')}</textarea><small>Notatki zapisują się automatycznie.</small></div><div class="actions"><button class="cta" data-complete="${escape(l.id)}">${state.completed[l.id]?'✓ Lekcja ukończona':'✓ Oznacz jako ukończoną'}</button>${lessons[idx+1]?`<a class="secondary" href="#/lesson/${encodeURIComponent(lessons[idx+1].id)}">Następna lekcja →</a>`:''}</div></article>`;}
+  function flash(){if(!cards.length)return `${heading('POWTÓRKI','Fiszki','Dodaj fiszki w data.js.')}`;flashIndex=(flashIndex+cards.length)%cards.length;const c=cards[flashIndex];return `${heading('SZYBKIE POWTÓRKI','Fiszki','Najpierw spróbuj samodzielnie odpowiedzieć, potem odsłoń odpowiedź.')}<div class="flash-info">Karta ${flashIndex+1} z ${cards.length}</div><button class="flash-card" data-flip="1"><small>${flipped?'ODPOWIEDŹ':'PYTANIE'}</small><strong>${escape(flipped?c.answer:c.question)}</strong><span>Kliknij, aby ${flipped?'wrócić do pytania':'odkryć odpowiedź'}</span></button><div class="actions center"><button class="secondary" data-prev="1">← Poprzednia</button><button class="cta" data-next="1">Następna →</button></div>`;}
+  function quiz(){if(!questions.length)return `${heading('SPRAWDŹ SIĘ','Quiz','Dodaj pytania w data.js.')}`;quizIndex=(quizIndex+questions.length)%questions.length;const q=questions[quizIndex],selected=state.quizAnswers[quizIndex];return `${heading('TEST WIEDZY','Krótki quiz','Zaznacz odpowiedź, a następnie sprawdź wyjaśnienie.')}<div class="question"><small>PYTANIE ${quizIndex+1} / ${questions.length}</small><h2>${escape(q.question)}</h2>${(q.answers||[]).map((a,i)=>`<button class="answer ${selected!==undefined?(i===q.correct?'correct':i===selected?'wrong':''):''}" data-answer="${i}" ${selected!==undefined?'disabled':''}><span>${String.fromCharCode(65+i)}</span> ${escape(a)}</button>`).join('')}${selected!==undefined?`<div class="feedback">${selected===q.correct?'✓ Dobrze!':'Spróbuj zapamiętać poprawną odpowiedź.'}<p>${escape(q.explanation||'')}</p></div>`:''}</div><div class="actions"><button class="secondary" data-prev-q="1">← Poprzednie</button><button class="cta" data-next-q="1">Następne pytanie →</button><button class="secondary" data-reset-q="1">Zacznij od nowa</button></div>`;}
+  const menu=[['start','▦','Pulpit'],['lessons','▤','Lekcje'],['flash','▧','Fiszki'],['quiz','◉','Quiz']];
+  function render(){const {page,id}=route();$('#courseName').textContent=course.title;$('#topCourseName').textContent=course.title;$('#courseNav').innerHTML=menu.map(([name,icon,label])=>`<a class="${name===(page==='lesson'?'lessons':page)?'active':''}" href="#/${name}"><span>${icon}</span>${label}</a>`).join('');$('#sideProgressNumber').textContent=`${done()} / ${lessons.length}`;$('#sideMeter').style.width=`${progress()}%`;$('#courseMain').innerHTML=({start,lessons:allLessons,lesson:()=>article(id),flash,quiz})[page]?.()||start();document.title=`${course.title} — Klasa 4i`;}
+  $('#courseMain').addEventListener('click',ev=>{const t=ev.target.closest('button');if(!t)return;if(t.dataset.complete){state.completed[t.dataset.complete]=!state.completed[t.dataset.complete];save();render();}if(t.dataset.flip){flipped=!flipped;render()}if(t.dataset.next){flashIndex++;flipped=false;render()}if(t.dataset.prev){flashIndex--;flipped=false;render()}if(t.dataset.answer!==undefined){state.quizAnswers[quizIndex]=Number(t.dataset.answer);save();render()}if(t.dataset.nextQ){quizIndex++;render()}if(t.dataset.prevQ){quizIndex--;render()}if(t.dataset.resetQ){state.quizAnswers={};quizIndex=0;save();render()}});
+  $('#courseMain').addEventListener('input',ev=>{if(ev.target.dataset.note){state.notes[ev.target.dataset.note]=ev.target.value;save()}});
+  let theme='dark';try{theme=localStorage.getItem('klasa4i-theme')==='light'?'light':'dark'}catch{}
+  function applyTheme(){document.documentElement.dataset.theme=theme;$('#mode').textContent=theme==='dark'?'☼':'☾'}
+  $('#mode').addEventListener('click',()=>{theme=theme==='dark'?'light':'dark';try{localStorage.setItem('klasa4i-theme',theme)}catch{}applyTheme()});
+  window.addEventListener('hashchange',()=>{render();window.scrollTo({top:0})});
+  applyTheme();if(!location.hash)location.hash='#/start';render();
+})();

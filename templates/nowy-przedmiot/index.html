@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pl" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Kurs na platformie Klasa 4i">
+  <link rel="icon" type="image/svg+xml" href="../../assets/icon.svg">
+  <link rel="stylesheet" href="../../css/course-template.css">
+  <title>Nowy przedmiot · Klasa 4i</title>
+  <script defer src="data.js"></script>
+  <script defer src="../../js/course-template.js"></script>
+</head>
+<body>
+  <a class="skip" href="#courseMain">Pomiń menu</a>
+  <div class="lesson-shell">
+    <aside class="side" aria-label="Menu przedmiotu">
+      <a class="school-logo" href="../../"><span>4i</span> STREFA NAUKI</a>
+      <a href="../../" class="back">← Wszystkie przedmioty</a>
+      <div class="course-name" id="courseName"></div>
+      <nav id="courseNav" aria-label="Nawigacja kursu"></nav>
+      <div class="side-progress"><div>Postępy w przedmiocie</div><strong id="sideProgressNumber">0 / 0</strong><div class="meter"><span id="sideMeter"></span></div></div>
+    </aside>
+    <div class="workspace">
+      <header class="top"><a href="../../">← <span>Przedmioty</span></a><span>KLASA 4I <b>/</b> <strong id="topCourseName">KURS</strong></span><button type="button" id="mode" title="Zmień motyw" aria-label="Zmień motyw">☼</button></header>
+      <main id="courseMain" class="page" tabindex="-1"></main>
+      <footer class="footer">Klasa 4i · Nauka we własnym tempie · Zapis lokalny</footer>
+    </div>
+  </div>
+  <noscript>Do działania kursu potrzebny jest JavaScript.</noscript>
+</body>
+</html>
