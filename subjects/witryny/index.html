@@ -2,56 +2,71 @@
 <html lang="pl" data-theme="dark">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#080d17">
-  <meta name="description" content="Klasa 4i · Witryny LAB: praktyczny kurs technologii webowych. 23 lekcje, fiszki, quizy, trening kodowania, statystyki i powtórki.">
-  <meta property="og:title" content="Witryny LAB — ucz się tworzyć strony">
-  <meta property="og:description" content="Darmowy, interaktywny kurs WWW, HTML, CSS, JavaScript, UX, PHP i bezpieczeństwa. Działa offline.">
-  <meta property="og:type" content="website">
-  <meta name="color-scheme" content="dark light">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#090e18">
+  <meta name="description" content="Klasa 4i — Witryny i aplikacje internetowe. Wybierz temat sprawdzianu, przerabiaj lekcje i ćwicz z fiszkami.">
+  <meta property="og:title" content="Witryny i aplikacje internetowe — Tematy · Klasa 4i">
   <link rel="icon" href="../../assets/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../../manifest.webmanifest">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/extra.css">
-  <title>Witryny internetowe — Klasa 4i</title>
-  <script src="js/data.js" defer></script>
-  <script src="js/labs.js" defer></script>
-  <script src="js/app.js" defer></script>
-  <script src="js/pwa.js" defer></script>
+  <link rel="stylesheet" href="../../css/portal.css">
+  <link rel="stylesheet" href="css/topics.css">
+  <script src="tematy.js" defer></script>
+  <script src="js/topics.js" defer></script>
+  <title>Witryny i aplikacje internetowe — wybór tematu | Klasa 4i</title>
 </head>
 <body>
-<a class="skip-link" href="#app">Przejdź do treści</a>
-<div class="layout">
-  <aside class="sidebar" aria-label="Panel nawigacyjny">
-    <a class="brand" href="../../" aria-label="Powrót do wyboru przedmiotu — klasa 4i">
-      <span class="brand-mark">W</span><span class="brand-name">WITRYNY LAB<small>Learn the web</small></span>
+<a class="skip-link" href="#main">Przejdź do tematów</a>
+<div class="shell">
+  <aside class="sidebar" aria-label="Nawigacja">
+    <a class="identity" href="../../index.html" aria-label="Klasa 4i — strona główna">
+      <span class="identity-logo">4<span>i</span><span class="logo-spot"></span></span>
+      <span class="identity-name">STREFA NAUKI<small>KLASA 4I</small></span>
     </a>
-    <a class="course-back" href="../../"><span aria-hidden="true">←</span> Wszystkie przedmioty</a>
-    <div class="nav-caption">WITRYNY INTERNETOWE</div>
-    <nav id="sideNav" aria-label="Główna nawigacja"></nav>
+    <div class="nav-label">NAWIGACJA</div>
+    <nav class="menu" aria-label="Menu przedmiotu">
+      <a class="menu-link" href="../../index.html"><span aria-hidden="true">▦</span> Przedmioty <span class="nav-arrow" aria-hidden="true">↗</span></a>
+      <a class="menu-link active" href="index.html" aria-current="page"><span aria-hidden="true">◈</span> Tematy <span class="menu-count" id="navTopicCount">1</span></a>
+      <a class="menu-link" href="#jak-to-dziala"><span aria-hidden="true">◇</span> Jak się uczyć</a>
+    </nav>
     <div class="sidebar-bottom">
-      <div id="sideProgress" class="side-progress"></div>
-      <div class="side-footer">✓ Bez konta i reklam<br>✓ Postępy zapisane lokalnie</div>
+      <div class="sidebar-note"><span class="status-dot"></span><strong>Witryny · Klasa 4i</strong><p>Każdy sprawdzian ma własny temat. Materiały z poprzednich zostają na stronie.</p></div>
+      <span class="sidebar-copy">4i / wszystkie tematy w jednym miejscu</span>
     </div>
   </aside>
-  <div class="main">
+  <div class="main-col">
     <header class="topbar">
-      <a class="course-mobile-back" href="../../" aria-label="Wróć do listy przedmiotów">← <span>Przedmioty</span></a>
-      <div class="crumb" id="breadcrumb">4i / Witryny / Pulpit</div>
-      <div class="top-actions">
-        <span class="top-status" id="networkStatus" aria-live="polite"><i></i> Zapis lokalny</span>
-        <button id="openSearch" class="search-trigger" aria-label="Otwórz wyszukiwarkę">
-          <span aria-hidden="true">⌕</span><span>Szukaj w kursie...</span><span class="kbd">Ctrl K</span>
-        </button>
-        <button id="themeBtn" class="icon-btn" title="Zmień motyw" aria-label="Zmień motyw">☼</button>
-        <button id="settingsBtn" class="icon-btn" data-nav="settings" title="Ustawienia" aria-label="Ustawienia">⚙</button>
-      </div>
+      <div class="top-path"><a href="../../index.html">PRZEDMIOTY</a> <span>/</span> <strong>WITRYNY</strong> <span>/</span> TEMATY</div>
+      <div class="top-controls"><span class="live-indicator"><span></span> Postępy lokalnie</span><button id="themeToggle" class="icon-button" type="button" title="Zmień motyw" aria-label="Zmień motyw">☼</button><div class="top-avatar" aria-label="Klasa 4i">4i</div></div>
     </header>
-    <main id="app" class="content" tabindex="-1"></main>
-    <footer class="site-footer"><a href="../../">Klasa 4i</a> <span>·</span> Witryny LAB <span>·</span> Materiał oparty na notatkach „witryny_ai.pdf" <span>·</span> Wszystkie dane zostają w Twojej przeglądarce.</footer>
+    <main id="main" class="container topics-container">
+      <nav class="breadcrumbs" aria-label="Ścieżka"><a href="../../index.html">Klasa 4i</a><span aria-hidden="true">/</span><span>Witryny i aplikacje internetowe</span></nav>
+      <section class="topics-hero" aria-labelledby="heroTitle">
+        <div class="hero-info">
+          <div class="topic-eyebrow"><span class="topic-pulse"></span> PRZEDMIOT ZAWODOWY <span class="hero-sep">/</span> KLASA 4I</div>
+          <h1 id="heroTitle">Witryny i aplikacje<br><em>internetowe.</em></h1>
+          <p>Wybierz, do którego sprawdzianu chcesz się przygotować. Każdy temat ma swoje lekcje, fiszki i testy. Stare materiały nigdzie nie znikają.</p>
+          <a class="hero-action" href="#tematy">Wybierz temat <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="topic-illustration" aria-hidden="true"><div class="topic-orbit orbit-a"></div><div class="topic-orbit orbit-b"></div><div class="topic-illustration-main">&lt;/&gt;<span>HTTP <b>/</b> HTTPS</span></div><div class="topic-floating topic-floating-top">{ }</div><div class="topic-floating topic-floating-bottom">4i_</div></div>
+      </section>
+      <section class="topics-summary" aria-label="Podsumowanie materiałów">
+        <div class="summary-cell"><span class="summary-icon">▤</span><div><strong id="topicTotal">1</strong><small>Dostępne tematy</small></div></div>
+        <div class="summary-cell"><span class="summary-icon">◈</span><div><strong id="lessonTotal">23</strong><small>Lekcje do nauki</small></div></div>
+        <div class="summary-cell"><span class="summary-icon">↗</span><div><strong id="completedTotal">0</strong><small>Ukończone lekcje</small></div></div>
+      </section>
+      <section id="tematy" class="topic-library" aria-labelledby="topicsTitle">
+        <div class="topic-section-top">
+          <div><div class="section-eyebrow">TWOJE MATERIAŁY</div><h2 id="topicsTitle">Wybierz temat<span class="heading-dot">.</span></h2><p>Otwórz sprawdzian i kontynuuj naukę od miejsca, w którym skończyłeś.</p></div>
+          <div class="topics-tools"><label class="topic-search"><span aria-hidden="true">⌕</span><span class="sr-only">Wyszukaj temat</span><input type="search" id="topicSearch" autocomplete="off" placeholder="Szukaj tematu..." aria-label="Szukaj tematu"></label><span id="topicCount" class="topic-count">1 temat</span></div>
+        </div>
+        <div id="topicGrid" class="topic-grid" aria-live="polite"></div>
+        <p id="topicEmpty" class="topic-empty" hidden>Nie znaleziono takiego tematu. Sprawdź pisownię lub wpisz inne słowo.</p>
+      </section>
+      <section id="jak-to-dziala" class="topic-help" aria-label="Jak korzystać"><div><div class="section-eyebrow">MAŁY PLAN NA NAUKĘ</div><h2>Wybierz. Przerób. Sprawdź.</h2><p>W środku każdego tematu znajdziesz materiał do powtórek oraz ćwiczenia. Postępy zapisują się w tej przeglądarce. Nowe sprawdziany będą pojawiały się obok dotychczasowych.</p></div><div class="topic-steps"><span><b>01</b> Wybierz sprawdzian</span><span><b>02</b> Ucz się z fiszkami</span><span><b>03</b> Rozwiąż quiz</span></div></section>
+    </main>
+    <footer class="footer"><span>© Klasa 4i · Centrum Nauki</span><span><a href="../../index.html">← Wszystkie przedmioty</a></span></footer>
   </div>
-  <nav class="mobile-nav" id="mobileNav" aria-label="Nawigacja mobilna"></nav>
 </div>
-<noscript><div class="noscript">Do działania lekcji i ćwiczeń potrzebny jest JavaScript. Włącz go w ustawieniach przeglądarki.</div></noscript>
+<noscript><p class="topics-noscript">Aby zobaczyć tematy, włącz JavaScript w przeglądarce.</p></noscript>
 </body>
 </html>

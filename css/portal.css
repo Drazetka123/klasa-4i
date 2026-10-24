@@ -8,3 +8,10 @@
 @media(max-width:650px){.top-path{font-size:9px}.live-indicator{display:none}.welcome{display:block;min-height:315px}.welcome-copy{padding:35px 25px;max-width:430px}.welcome h1{font-size:51px}.welcome p{font-size:13px;position:relative;z-index:3}.welcome-art{position:absolute;right:-125px;top:15px;height:290px;width:290px;opacity:.24;transform:scale(.7)}.overview{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:11px}.overview-card{display:block;padding:12px;min-height:116px}.overview-icon{width:31px;height:31px;font-size:19px;margin-bottom:8px}.overview-card strong{font-size:22px}.overview-card small{font-size:10px;line-height:1.35}.section-top{display:block}.section-tools{margin-top:21px}.search-box{flex:1;min-width:0}.subjects-grid{grid-template-columns:1fr}.subject-card,.coming-card{min-height:320px}.help{grid-template-columns:1fr;padding:23px}.help-steps{grid-template-columns:1fr;gap:9px}.footer{display:block}.footer span{display:block;margin:6px 0}}
 @media(max-width:380px){.container{padding-left:14px;padding-right:14px}.topbar{padding:0 14px}.welcome-copy{padding:28px 20px}.welcome h1{font-size:46px}.overview-card{padding:9px}.count-pill{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Drugi przedmiot — osobny akcent bez zmian w starym kursie */
+.subject-violet .subject-icon{background:linear-gradient(140deg,#bab0ff,#76decc)}
+.subject-violet:before{border-color:#a6a2ff36}
+.subject-violet:hover{border-color:#aaa6ff}
+.subject-violet .subject-open{color:#b9b2ff}
+.subject-violet .subject-meter span{background:linear-gradient(90deg,#b9abff,#8be9d4)}

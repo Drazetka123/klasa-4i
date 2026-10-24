@@ -3,18 +3,26 @@
   const catalog = Array.isArray(window.CLASS4I_SUBJECTS) ? window.CLASS4I_SUBJECTS : [];
   const $ = selector => document.querySelector(selector);
   const escape = text => String(text ?? '').replace(/[&<>"']/g, symbol => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[symbol]));
-  const safeHref = path => typeof path === 'string' && /^subjects\/[a-z0-9-]+\/$/.test(path) ? path : '#przedmioty';
+  const safeHref = path => typeof path === 'string' && /^subjects\/[a-z0-9-]+\/index\.html$/.test(path) ? path : '#przedmioty';
   const stored = key => {
     try { return JSON.parse(localStorage.getItem(key) || '{}'); }
     catch { return {}; }
   };
+  const topicList = subject => typeof subject.topicCatalog === 'string' &&
+    Array.isArray(window[subject.topicCatalog]) ? window[subject.topicCatalog] : null;
+  const lessonCount = subject => {
+    const topics = topicList(subject);
+    return topics ? topics.reduce((sum, topic) => sum + (Number(topic.lessons) || 0), 0) : (Number(subject.lessons) || 0);
+  };
   const getDone = subject => {
+    const topics = topicList(subject);
+    if (topics) return topics.reduce((sum, topic) => sum + getDone({storageKey: topic.storageKey, lessons: topic.lessons}), 0);
     if (!subject.storageKey) return 0;
     const state = stored(subject.storageKey);
     const completed = state && state.completed && typeof state.completed === 'object' ? state.completed : {};
     return Math.min(Math.max(0, Number(subject.lessons) || 0), Object.values(completed).filter(Boolean).length);
   };
-  const percentage = subject => subject.lessons ? Math.round(getDone(subject) / subject.lessons * 100) : 0;
+  const percentage = subject => lessonCount(subject) ? Math.round(getDone(subject) / lessonCount(subject) * 100) : 0;
   const plural = (number, one, few, many) => {
     const n = Math.abs(number);
     return n === 1 ? one : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? few : many;
@@ -30,7 +38,7 @@
       <div class="subject-break"></div>
       <div class="subject-progress"><span>Twój postęp</span><strong>${progress}%</strong></div>
       <div class="subject-meter" role="progressbar" aria-label="Postęp w przedmiocie ${escape(subject.name)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${progress}"><span style="width:${progress}%"></span></div>
-      <div class="subject-foot"><span>${done} / ${Number(subject.lessons)||0} ukończonych lekcji</span><span class="subject-open">Otwórz kurs <span aria-hidden="true">→</span></span></div>
+      <div class="subject-foot"><span>${done} / ${lessonCount(subject)} ukończonych lekcji</span><span class="subject-open">Wybierz temat <span aria-hidden="true">→</span></span></div>
     </a>`;
   };
   const comingSoon = () => `<div class="coming-card"><div class="coming-plus" aria-hidden="true">＋</div><div class="coming-pill">BIBLIOTEKA 4I</div><h3>Miejsce na kolejny przedmiot</h3><p>Ta platforma będzie rosła razem z Wami. Następne materiały pojawią się tutaj.</p><div class="coming-bottom"><span class="coming-dashes" aria-hidden="true">— — —</span> Gotowa na rozbudowę</div></div>`;
@@ -42,7 +50,7 @@
     $('#subjectCount').textContent = `${matches.length} ${plural(matches.length,'przedmiot','przedmioty','przedmiotów')}`;
     $('#navCount').textContent = catalog.length;
     $('#totalSubjects').textContent = String(catalog.length).padStart(2,'0');
-    $('#totalLessons').textContent = catalog.reduce((sum,subject)=>sum+(Number(subject.lessons)||0),0);
+    $('#totalLessons').textContent = catalog.reduce((sum,subject)=>sum+lessonCount(subject),0);
     $('#totalCompleted').textContent = catalog.reduce((sum,subject)=>sum+getDone(subject),0);
   }
   let theme = 'dark';
