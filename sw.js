@@ -1,5 +1,5 @@
 /* Offline cache dla platformy 4i; increment CACHE_NAME with each release. */
-const CACHE_NAME = 'klasa4i-v4-teoria-programowania-20261024';
+const CACHE_NAME = 'klasa4i-v5-logo-20261026';
 const CORE = [
   './', './index.html', './css/portal.css', './js/portal.js', './subjects/catalog.js', './subjects/witryny/tematy.js',
   './subjects/witryny/', './subjects/witryny/index.html',
