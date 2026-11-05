@@ -29,7 +29,7 @@
     text('#quizBest',best===null?'—':best+'%');
   };
   function show(view) {
-    if (!['library','flashcards','quiz','progress'].includes(view)) return;
+    if (!['library','flashcards','quiz','lab','progress'].includes(view)) return;
     activeView=view;
     document.querySelectorAll('.view').forEach(el=>el.hidden=el.id!=='view-'+view);
     document.querySelectorAll('[data-view]').forEach(el=>{
@@ -233,7 +233,10 @@
     $('#historyList').innerHTML=results.length?results.slice(0,10).map(x=>`<div class="history-row"><div> Kartkówka · ${Number(x.total)||0} metod<small>${new Date(x.date).toLocaleString('pl-PL')}</small></div><strong>${Number(x.points)||0}/${Number(x.total)||0} · ${Number(x.percent)||0}%</strong></div>`).join(''):'<p>Nie masz jeszcze ukończonych kartkówek. Rozwiąż pierwszą tabelkę, żeby zobaczyć wynik.</p>';
   }
   $('#exportState').addEventListener('click',()=>{
-    const blob=new Blob([JSON.stringify({type:'klasa4i-teoria-progress',version:1,exportedAt:new Date().toISOString(),data:state},null,2)],{type:'application/json'});
+    let labData=null;
+    try { labData=JSON.parse(localStorage.getItem('klasa4i-teoria-lab-v1')||'null'); } catch {}
+    const exportData={...state,lab:labData};
+    const blob=new Blob([JSON.stringify({type:'klasa4i-teoria-progress',version:2,exportedAt:new Date().toISOString(),data:exportData},null,2)],{type:'application/json'});
     const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='klasa-4i-teoria-postepy.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500);
     text('#backupMessage','Wyeksportowano postępy do pliku JSON.');
   });
@@ -245,7 +248,11 @@
       if(!confirm('Zastąpić lokalne postępy danymi z pliku?'))return;
       const raw=obj.data;
       state={completed:Object.fromEntries(groups.map(g=>[g,Boolean(raw.completed?.[g])])),favorites:(Array.isArray(raw.favorites)?raw.favorites:[]).filter(id=>byId.has(id)),known:Object.fromEntries(Object.entries(raw.known||{}).filter(([id,v])=>byId.has(id)&&['known','again'].includes(v))),review:Object.fromEntries(Object.entries(raw.review||{}).filter(([id,v])=>byId.has(id)&&v===true)),history:Array.isArray(raw.history)?raw.history.filter(x=>typeof x?.percent==='number'&&Number.isFinite(x.percent)).slice(0,40):[],quiz:null};
-      save();makeDeck();renderLibrary();renderProgress();text('#backupMessage','Zaimportowano postępy pomyślnie.');
+      save();
+      if(raw.lab && typeof raw.lab==='object'){
+        try { localStorage.setItem('klasa4i-teoria-lab-v1',JSON.stringify(raw.lab)); window.dispatchEvent(new Event('klasa4i-lab-import')); } catch {}
+      }
+      makeDeck();renderLibrary();renderProgress();text('#backupMessage','Zaimportowano postępy pomyślnie.');
     }catch{ text('#backupMessage','Nie udało się odczytać postępów. Wybierz prawidłowy eksport JSON.'); }
     finally{ e.target.value=''; }
   });
@@ -253,7 +260,7 @@
     const valid=DATA.length===109&&groups.every(g=>DATA.some(m=>m.group===g));
     if(!valid){$('#methodsList').textContent='Nie udało się załadować listy metod. Sprawdź plik js/methods.js.';return;}
     setupHint();makeDeck();renderLibrary();metric();
-    const requested=location.hash.replace('#','');show(['library','flashcards','quiz','progress'].includes(requested)?requested:'library');
+    const requested=location.hash.replace('#','');show(['library','flashcards','quiz','lab','progress'].includes(requested)?requested:'library');
   }
   boot();
 })();

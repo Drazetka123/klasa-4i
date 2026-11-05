@@ -37,5 +37,39 @@ window.CLASS4I_SUBJECTS = [
     labs: 0,
     storageKey: 'klasa4i-teoria-metody-v1',
     topicCatalog: 'CLASS4I_TEORIA_TOPICS'
+  },
+  {
+    id: 'geografia',
+    name: 'Geografia',
+    shortName: 'Geografia',
+    category: 'Przedmioty ogólne',
+    description: 'Materiały do sprawdzianów z geografii. Wybieraj tematy, ucz się z lekcji i sprawdzaj wiedzę.',
+    href: 'subjects/geografia/index.html',
+    icon: '🌍',
+    color: 'mint',
+    tags: ['Rolnictwo na świecie', 'Uprawy', 'Hodowla', 'Lasy'],
+    lessons: 12,
+    flashcards: 36,
+    quizzes: 24,
+    labs: 0,
+    storageKey: 'klasa4i-geografia-rolnictwo-v1',
+    topicCatalog: 'CLASS4I_GEOGRAFIA_TOPICS'
+  },
+  {
+    id: 'systemy-baz-danych',
+    name: 'Systemy baz danych',
+    shortName: 'SBD',
+    category: 'Przedmioty zawodowe',
+    description: 'Podzapytania, JOIN-y i widoki. Ucz się na przykładach i testuj własne kwerendy w laboratorium SQL.',
+    href: 'subjects/systemy-baz-danych/index.html',
+    icon: 'SQL',
+    color: 'blue',
+    tags: ['Podzapytania', 'JOIN', 'Widoki', 'Laboratorium SQL'],
+    lessons: 5,
+    flashcards: 24,
+    quizzes: 20,
+    labs: 1,
+    storageKey: 'klasa4i-sbd-zapytania-join-widoki-v1',
+    topicCatalog: 'CLASS4I_SBD_TOPICS'
   }
 ];

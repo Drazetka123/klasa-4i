@@ -15,3 +15,11 @@
 .subject-violet:hover{border-color:#aaa6ff}
 .subject-violet .subject-open{color:#b9b2ff}
 .subject-violet .subject-meter span{background:linear-gradient(90deg,#b9abff,#8be9d4)}
+
+
+/* Nowy przedmiot: Systemy baz danych */
+.subject-blue .subject-icon{background:linear-gradient(140deg,#a5c8ff,#8ce8e0);color:#10243a}
+.subject-blue:before{border-color:#8abaff3b}
+.subject-blue:hover{border-color:#8dbbff}
+.subject-blue .subject-open{color:#a7c8ff}
+.subject-blue .subject-meter span{background:linear-gradient(90deg,#83b9ff,#82e4d4)}

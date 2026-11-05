@@ -1,8 +1,47 @@
 # Klasa 4i — Centrum Nauki
 
+## Oryginalne notatki PDF
+
+W kursach Geografia → „Rolnictwo na świecie” oraz Systemy baz danych → „Zapytania zagnieżdżone, złączenia, widoki” na pulpicie znajduje się sekcja „Materiały do pobrania”. Użytkownik może pobrać oryginalny PDF albo otworzyć jego podgląd. Pliki są przechowywane w `assets/pdf/` i dodane do cache offline.
+
+
 ![Strona główna klasy 4i](assets/platform-desktop.png)
 
-Platforma edukacyjna klasy **4i**, rozwijana tak, żeby dodawać kolejne przedmioty. **Są już dwa przedmioty: Witryny i aplikacje internetowe oraz Teoria programowania**. Po wejściu na stronę uczniowie widzą katalog przedmiotów, a po kliknięciu Witryn pojawia się osobny **wybór tematów/sprawdzianów**. Dopiero po wybraniu tematu otwiera się jego kurs. Bez backendu, frameworków i budowania projektu — idealne do **GitHub Pages**.
+Platforma edukacyjna klasy **4i**, rozwijana tak, żeby dodawać kolejne przedmioty. **Dostępne są cztery przedmioty: Witryny i aplikacje internetowe, Teoria programowania, Geografia oraz Systemy baz danych**. Po wejściu na stronę uczniowie widzą katalog przedmiotów, a po kliknięciu Witryn pojawia się osobny **wybór tematów/sprawdzianów**. Dopiero po wybraniu tematu otwiera się jego kurs. Bez backendu, frameworków i budowania projektu — idealne do **GitHub Pages**.
+
+## NOWOŚĆ 26.10.2026: Laboratorium JavaScript w Teorii programowania
+
+W temacie **Teoria programowania → Metody obiektów: Math, Array, String** jest teraz piąta zakładka nauki: **Laboratorium JS**. Można je otworzyć z lewego menu, dolnego menu na telefonie lub przyciskiem na banerze tematu. 
+
+Funkcje laboratorium:
+
+- **109 metod z istniejącej bazy** — wybierz Math, Array albo String; zawęź do „z lekcji” / „dodatkowe”; zobacz opis, argumenty, typ zwracanej wartości i gotowy przykład.
+- **Edytor JavaScript** — zmieniaj przykłady albo pisz własny kod. Kliknij „Uruchom kod” lub użyj `Ctrl + Enter` (`Cmd + Enter` na Macu).
+- **Wyniki bez F12** — panel pod kodem wyświetla `console.log()`, ostatnią wartość wyrażenia, jej typ (np. `Number`, `String`, `Array`, `Boolean`) oraz komunikaty błędów.
+- **Przykłady metod zmieniających tablicę** — pokazują zawartość tablicy przed i po operacji oraz typ/wartość zwracaną przez metodę (np. `push`, `pop`, `splice`, `sort`).
+- **Trzy zadania do eksperymentowania** — porównanie zaokrągleń, `push()` vs `map()`, operacje na tekstach.
+- **Ochrona przed zawieszeniem** — każde uruchomienie odbywa się w osobnym Web Workerze z limitem 3 sekund, bez dostępu do DOM i bez sieci. Nie wklejaj kodu od nieznanych osób.
+- **Autozapis** — kod każdej metody zapisuje się osobno w `localStorage` pod kluczem `klasa4i-teoria-lab-v1`. Licznik pokazuje, ile różnych metod już przetestowano.
+- **Kopie postępów** — z zakładki „Postępy” eksport JSON obejmuje także zapis laboratorium; import starszych plików postępów nadal działa.
+
+### Szybka aktualizacja istniejącej strony na GitHub Pages
+
+Jeśli Witryny i Teoria programowania już działają, użyj **paczki `Klasa-4i-Laboratorium-AKTUALIZACJA.zip`** z samymi zmienionymi plikami. Wgraj je **w tych samych podfolderach**, zastępując poprzednie:
+
+```text
+sw.js
+subjects/teoria-programowania/tematy/metody-math-array-string/
+  index.html
+  css/lab.css              (nowy)
+  js/app.js                (zmieniony)
+  js/lab.js                (nowy)
+```
+
+Cała wersja ZIP też zawiera aktualny projekt; do już istniejącego repozytorium prościej wprowadzić wymienione pliki. Nie usuwaj `subjects/witryny/` ani `js/methods.js`. Po opublikowaniu odśwież stronę z pominięciem cache (`Ctrl+Shift+R`), w razie potrzeby zamknij i otwórz kartę, aby zaktualizować offline/PWA.
+
+### Testy
+
+Sprawdzono wykonanie przykładowego kodu dla **wszystkich 109 metod** w Chromium, wynik przykładowy `Math.sqrt(81)` = `9`, operacje `push()` i `map()`, limit nieskończonej pętli (3 s), zadanie String, układ desktop/mobilny oraz testy `python tests/check_static.py`. Testy przeglądarki przeprowadzono przez wstrzyknięcie plików do strony testowej, gdyż otwieranie lokalnego URL było blokowane przez środowisko.
 
 ## NOWOŚĆ: Teoria programowania — Metody Math, Array i String
 
@@ -13,6 +52,7 @@ Plik notatek `Metody obiektu Math w JS.docx` dostarczył opisy 109 metod. **Uwag
 Tryby nauki:
 - **Baza metod** — filtry Math/Array/String, źródło, wyszukiwarka po opisie, szczegóły argumentów i typów, zakładki, odhaczanie działów.
 - **Fiszki** — losowanie, odpowiedź, „Umiem”/„Powtórzę”, filtrowanie trudniejszych metod i zapis znajomości.
+- **Laboratorium JS** — wybór metody z gotową składnią, edytor kodu i wynik bez konsoli F12, praktyczne zadania.
 - **Kartkówka** — podana metoda i trzy pola do uzupełnienia: „Co robi?”, „Co wstawiamy (argument i typ)?”, „Co zwróci (typ)?”. Wybierz 5/10/15/20 lub wszystkie metody, filtr i opcjonalny limit 10 minut. Po sprawdzeniu widać wzory. **Nie ma automatycznego oceniania wolnego tekstu**: uczeń sam oznacza poprawność każdego wiersza, żeby równoważne sformułowania były uznawane.
 - **Postępy** — historia wyników, ukończone działy, eksport/import zapisu JSON (nie zamieszczaj tych plików w publicznym repozytorium).
 
@@ -32,13 +72,37 @@ Dodaj nowy folder w `subjects/teoria-programowania/tematy/`, a w `subjects/teori
 
 ### Testy
 
-Szybka kontrola struktury i JavaScript: `python tests/check_static.py`. Test interfejsu: `python tests/smoke.py` (wymaga Playwright i Chromium). W dostarczonym środowisku wykonano poprawnie test statyczny; pełnego testu przeglądarkowego nie udało się przeprowadzić z powodu ograniczeń środowiska.
+Szybka kontrola struktury i JavaScript: `python tests/check_static.py`. Test interfejsu: `python tests/smoke.py` (wymaga Playwright i Chromium). W tej wersji oba testy przechodzą. Test przeglądarkowy sprawdza ekran główny, wybór tematów, lekcje, quizy, nawigację i układ w szerokościach 1440 px oraz 390 px; uruchomienie silnika SQLite jest w nim zastępowane kontrolowanym testowym Web Workerem. Gotowe presety SQL są dodatkowo wykonywane na SQLite w teście statycznym.
+
+## NOWOŚĆ 05.11.2026: Geografia i Systemy baz danych
+
+Do istniejącej platformy dodano dwa przedmioty. Każdy ma własną stronę wyboru tematów i oddzielny zapis postępów.
+
+### Geografia → Rolnictwo na świecie
+
+Materiał powstał na podstawie PDF „Notatki z Geografii - Rolnictwo i Leśnictwo”. Zawiera **12 lekcji, 36 fiszek i 24 pytania quizowe**. Zachowano również część o lasach z końca przesłanych notatek, ponieważ była częścią tego samego zestawu.
+
+Zakres lekcji: czynniki przyrodnicze i pozaprzyrodnicze rozwoju rolnictwa; intensywne i ekstensywne typy gospodarowania; ryż, ziemniaki, buraki, kawa, kakao, herbata i pszenica; chów intensywny i ekstensywny; oznaczenia chowu kur na jajach; obszary hodowli bydła, trzody chlewnej i owiec; funkcje, lesistość, deforestacja, rodzaje lasów oraz gospodarka leśna. Klucz zapisu: `klasa4i-geografia-rolnictwo-v1`.
+
+### Systemy baz danych → Zapytania zagnieżdżone, złączenia, widoki
+
+Materiał powstał na podstawie PDF „Notatki z Systemów Baz Danych”. Zawiera **5 lekcji, 24 fiszki, 20 pytań quizowych i Laboratorium SQL**.
+
+Zakres lekcji: podzapytania zwykłe i skorelowane; `IN`, `NOT IN`, `EXISTS` i `NOT EXISTS`; `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, `FULL OUTER JOIN`, `CROSS JOIN`, `SELF JOIN`; łączenie wielu tabel; tworzenie, odpytywanie, modyfikowanie i usuwanie widoków.
+
+**Laboratorium SQL:** edytor kwerend bez F12, gotowe przykłady, podgląd schematu i danych tabel, tabela wyników, komunikaty błędów, reset bazy i licznik uruchomień. Ćwiczenia działają na przykładowej bazie w pamięci przeglądarki; Twoje kwerendy nie zmieniają żadnego zewnętrznego serwera ani prawdziwej bazy. Laboratorium używa SQL.js / SQLite w Web Workerze. Przy pierwszym uruchomieniu silnik jest pobierany z kilku zapasowych źródeł CDN; po pobraniu Service Worker zapisuje pliki w cache. Przy planowaniu nauki offline najlepiej najpierw uruchomić laboratorium online i sprawdzić działanie po ponownym otwarciu. Jeśli pobranie się nie powiedzie, ekran pokazuje szczegóły problemu i przycisk ponowienia. SQLite nie obsługuje `CREATE OR REPLACE VIEW` bezpośrednio, więc laboratorium zamienia tę składnię na `DROP VIEW IF EXISTS` + `CREATE VIEW`. Klucz zapisu: `klasa4i-sbd-zapytania-join-widoki-v1`.
+
+## Poprawka laboratorium SQL — 05.11.2026
+
+Jeśli laboratorium nie może pobrać silnika, zaktualizuj pliki `sw.js`, `subjects/systemy-baz-danych/tematy/zapytania-zagniezdzone-zlaczenia-widoki/js/app.js` i `.../js/sql-worker.js`. Nowy worker próbuje kilku źródeł SQL.js (jsDelivr, cdnjs i unpkg, z zapasową wersją 1.14.2), a ekran laboratorium pokazuje dokładniejszy błąd i przycisk ponowienia. Zmieniono nazwę cache Service Workera na `klasa4i-v9-sql-fallback-20261105`, aby przeglądarka pobrała nową wersję. Po wgraniu zmian otwórz stronę i wykonaj twarde odświeżenie (`Ctrl + Shift + R`).
 
 ## Co jest dostępne
 
 - **Strona główna** `index.html`: wybór przedmiotu, wyszukiwarka przedmiotów, statystyki i postęp.
 - **Witryny i aplikacje internetowe → Protokoły HTTP/HTTPS i aplikacje internetowe**: dotychczasowy pełny kurs — 23 lekcje, 57 fiszek, 66 pytań, quiz, egzamin, 8 laboratoriów HTML/CSS/JS, słownik, notatki, historia wyników i postępy.
 - **Teoria programowania → Metody obiektów: Math, Array, String**: 109 metod (34 Math, 40 Array, 35 String), wyszukiwanie, przykłady argumentów i typów, 109 fiszek, losowa kartkówka w postaci czterokolumnowej tabeli z samodzielnym ocenianiem, statystyki, historia wyników i eksport/import danych.
+- **Geografia → Rolnictwo na świecie**: 12 lekcji, 36 fiszek, 24 pytania quizowe, w tym dział o lasach dołączony w przesłanych notatkach.
+- **Systemy baz danych → Zapytania zagnieżdżone, złączenia, widoki**: 5 lekcji, 24 fiszki, 20 pytań quizowych, 8 tabel ćwiczeniowych, gotowe kwerendy i Laboratorium SQL z silnikiem SQLite działającym w przeglądarce.
 - Motyw ciemny i jasny, responsywność, obsługa klawiatury, PWA i podstawowe działanie offline po zapisaniu zasobów.
 - Każdy przedmiot ma **osobną podstronę**, a jego postępy są przechowywane w osobnym kluczu `localStorage`. Obecny kurs nadal korzysta z `witryny-lab-v1`, żeby zachować wcześniejsze dane na tej samej domenie.
 
@@ -46,7 +110,7 @@ Szybka kontrola struktury i JavaScript: `python tests/check_static.py`. Test int
 
 1. Otwórz główny `index.html` w przeglądarce (linki prowadzą bezpośrednio do plików, więc działają też lokalnie) lub uruchom `python -m http.server 8000` w katalogu repozytorium.
 2. Otwórz `http://localhost:8000/`.
-3. Wybierz jeden z dwóch przedmiotów, potem temat. Każdy przedmiot ma osobną podstronę wyboru tematów i możliwość powrotu na stronę główną.
+3. Wybierz jeden z czterech przedmiotów, potem temat. Każdy przedmiot ma osobną podstronę wyboru tematów i możliwość powrotu na stronę główną. W laboratorium SQL przy pierwszym uruchomieniu połącz się z Internetem, aby pobrać silnik SQLite.
 
 **GitHub Pages:** prześlij całą zawartość projektu do repozytorium, tak żeby plik `index.html` leżał w katalogu głównym. W **Settings → Pages → Build and deployment** wybierz **Deploy from a branch**, `main`, `/(root)`. Strona będzie dostępna zwykle pod `https://LOGIN.github.io/REPO/`. Ścieżki są względne, więc działają także pod podkatalogiem repozytorium.
 
@@ -77,7 +141,7 @@ klasa-4i/
 │           ├── labs.js                # ćwiczenia tematu nr 1
 │           ├── app.js                 # kurs tematu nr 1
 │           └── pwa.js
-│   └── teoria-programowania/
+│   ├── teoria-programowania/
 │       ├── index.html                 # wybór tematów teorii
 │       ├── tematy.js                  # KATALOG TEMATÓW teorii
 │       ├── css/topics.css             # style wyboru tematów
@@ -86,7 +150,20 @@ klasa-4i/
 │           ├── index.html             # nowy kurs — baza/fiszki/kartkówka
 │           ├── css/methods.css
 │           ├── js/methods.js           # DANE: 109 metod
-│           └── js/app.js               # logika nauki
+│           ├── js/app.js               # logika nauki
+│           ├── js/lab.js               # wykonanie kodu, wybór przykładów, autozapis
+│           └── css/lab.css             # style laboratorium
+│   ├── geografia/                     # wybór tematów geografii
+│   │   ├── index.html
+│   │   ├── tematy.js
+│   │   └── tematy/rolnictwo-na-swiecie/ # kurs z PDF-a geografii
+│   └── systemy-baz-danych/             # wybór tematów SBD
+│       ├── index.html
+│       ├── tematy.js
+│       └── tematy/zapytania-zagniezdzone-zlaczenia-widoki/
+│           ├── index.html
+│           ├── data.js
+│           └── js/sql-worker.js        # silnik SQL w osobnym wątku
 ├── assets/                            # ikony PWA
 ├── manifest.webmanifest
 ├── sw.js                               # offline/cache całej platformy
@@ -146,7 +223,7 @@ Nie musisz kopiować rozbudowanego kursu Witryn. W repozytorium jest **`template
 3. Dopisz przedmiot do `subjects/catalog.js`. Upewnij się, że `href`, `lessons` i `storageKey` odpowiadają rzeczywistemu folderowi i danym.
 4. Prześlij zmiany na GitHuba. Kafelek pojawi się na stronie głównej automatycznie. Jeśli nowy przedmiot ma mieć kilka sprawdzianów, skopiuj podejście opisane poniżej.
 
-Szablon obsługuje: **lekcje z sekcjami, odhaczanie ukończenia, własne notatki, fiszki, quiz z wyjaśnieniami, pasek postępu i jasny/ciemny motyw**. Może być bazą do dalszych funkcji specyficznych dla przedmiotu. Sam szablon nie jest dodatkowym przedmiotem i nie pojawia się na stronie głównej. Katalog zawiera obecnie Witryny i aplikacje internetowe oraz Teorię programowania.
+Szablon obsługuje: **lekcje z sekcjami, odhaczanie ukończenia, własne notatki, fiszki, quiz z wyjaśnieniami, pasek postępu i jasny/ciemny motyw**. Może być bazą do dalszych funkcji specyficznych dla przedmiotu. Sam szablon nie jest dodatkowym przedmiotem i nie pojawia się na stronie głównej. Katalog zawiera obecnie cztery przedmioty: Witryny, Teorię programowania, Geografię i Systemy baz danych.
 
 ## Dodawanie kolejnego sprawdzianu z Witryn (WAŻNE)
 
@@ -179,7 +256,7 @@ Szablon obsługuje: **lekcje z sekcjami, odhaczanie ukończenia, własne notatki
 
 ## Jak aktualizować repozytorium na GitHubie
 
-Prześlij **wszystkie pliki z tego wydania** z zachowaniem podfolderów. Zastąp stare wersje plików zmienionych (np. `index.html`, `subjects/catalog.js`, `css/portal.css`, `sw.js`, `README.md`) i **dodaj folder `subjects/teoria-programowania/` w całości**. Nie usuwaj `subjects/witryny/` ani istniejących materiałów. Nie przesyłaj wyłącznie ZIP-a do repozytorium. Pamiętaj, że GitHubowe przesyłanie pojedynczych plików przez WWW bywa niewygodne dla głębokich katalogów; można też użyć GitHub Desktop albo edycji plików online.
+Prześlij **wszystkie pliki z tego wydania** z zachowaniem podfolderów. Zastąp zmienione pliki główne (`index.html`, `subjects/catalog.js`, `css/portal.css`, `js/course-template.js`, `sw.js`, `README.md`) oraz **dodaj foldery `subjects/geografia/` i `subjects/systemy-baz-danych/` w całości**. Nie usuwaj `subjects/witryny/`, `subjects/teoria-programowania/` ani dotychczasowych materiałów. Nie przesyłaj wyłącznie ZIP-a do repozytorium. Pamiętaj, że GitHubowe przesyłanie pojedynczych plików przez WWW bywa niewygodne dla głębokich katalogów; można też użyć GitHub Desktop albo edycji plików online.
 
 **Automatyczne statystyki:** dla Witryn strona główna pobiera tematy z `window.CLASS4I_WITRYNY_TOPICS` (wczytane z `subjects/witryny/tematy.js`), a nie jedynie z pojedynczego klucza kursu. Po dodaniu kolejnego sprawdzianu i aktualizacji danych karty pojawią się sumaryczne lekcje oraz postępy również na poziomie listy przedmiotów.
 
