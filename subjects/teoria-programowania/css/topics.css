@@ -44,3 +44,15 @@
 .topics-hero h1 em{color:#b5b4ff}
 .topic-illustration-main{color:#c9bcff;background:linear-gradient(135deg,#483675d9,#11655ed8);font-size:57px}
 .topic-illustration-main span{font-size:9px;letter-spacing:1.1px}
+
+
+/* Karta dodatkowego opracowania PDF/DOCX — bez fikcyjnych liczników quizu i postępu. */
+.topic-resource-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.topic-resource-bottom>div{display:grid;gap:7px}
+.topic-resource-bottom>div>span{font-size:10px;color:var(--muted)}
+.topic-resource-bottom strong{font-size:12px;color:var(--mint)}
+.topic-resource-bottom strong span{font-size:15px}
+.resource-format-pill{flex:none;padding:8px 10px;border:1px solid var(--strong-border);border-radius:9px;background:var(--panel2);color:var(--lav);font-size:10px;font-weight:900}
+.topic-card-resource{border-color:#a99fff57}
+.topic-card-resource .topic-index{background:linear-gradient(140deg,#bfb7ff,#84e3d1)}
+.topic-card-resource:hover{border-color:var(--lav)}

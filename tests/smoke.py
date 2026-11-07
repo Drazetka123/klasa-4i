@@ -65,6 +65,9 @@ WEB = inline('subjects/witryny/tematy/protokoly-http-https-i-aplikacje-interneto
 THEORY_TOPICS = inline('subjects/teoria-programowania/index.html', ['../../css/portal.css', 'css/topics.css'], ['tematy.js', 'js/topics.js'])
 THEORY = inline('subjects/teoria-programowania/tematy/metody-math-array-string/index.html',
                 ['../../../../css/portal.css', 'css/methods.css'], ['js/methods.js', 'js/app.js'])
+JS_RESOURCE = inline('subjects/teoria-programowania/tematy/javascript-pelna-notatka/index.html',
+                     ['../../../../css/portal.css', '../metody-math-array-string/css/methods.css', 'css/resource.css'],
+                     ['js/resource.js'])
 GEO = inline('subjects/geografia/tematy/rolnictwo-na-swiecie/index.html',
              ['../../../../css/course-template.css'], ['data.js', '../../../../js/course-template.js'])
 SBD = inline('subjects/systemy-baz-danych/tematy/zapytania-zagniezdzone-zlaczenia-widoki/index.html',
@@ -78,7 +81,7 @@ with sync_playwright() as p:
     pages = [
         ('portal', PORTAL), ('witryny-tematy', TOPICS), ('geografia-tematy', GEO_TOPICS),
         ('sbd-tematy', SBD_TOPICS), ('witryny', WEB), ('teoria-tematy', THEORY_TOPICS),
-        ('metody', THEORY), ('geografia', GEO), ('sbd', SBD)
+        ('metody', THEORY), ('javascript-resource', JS_RESOURCE), ('geografia', GEO), ('sbd', SBD)
     ]
     for width in (1440, 390):
         ctx = browser.new_context(viewport={'width': width, 'height': 860})
@@ -115,13 +118,23 @@ with sync_playwright() as p:
                 page.locator('[data-start-quiz]').click()
                 assert page.locator('#examClock').count() == 1
             if label == 'teoria-tematy':
-                assert page.locator('.topic-card').count() == 1
+                assert page.locator('.topic-card').count() == 2
                 assert 'Metody obiektów: Math, Array, String' in page.locator('.topic-card').first.inner_text()
+                assert 'JavaScript — pełne opracowanie' in page.locator('.topic-card').nth(1).inner_text()
+                assert page.locator('.topic-card').nth(1).get_attribute('href') == 'tematy/javascript-pelna-notatka/index.html'
+                assert '46 stron' in page.locator('.topic-card').nth(1).inner_text()
             if label == 'metody':
                 assert page.locator('#allCount').inner_text() == '109'
                 page.evaluate("document.querySelector('[data-view=\"lab\"]').click()")
                 page.wait_for_timeout(40)
                 assert page.locator('#labCode').count() == 1
+            if label == 'javascript-resource':
+                assert page.locator('h1').inner_text().replace('\n', ' ') == 'JavaScript: pełne opracowanie.'
+                assert page.locator('a[download]').count() == 4
+                assert page.locator('iframe[title=\"Podgląd pełnej notatki JavaScript\"]').count() == 1
+                assert page.locator('a[href^=\"https://www.w3schools.com/js/\"]').count() >= 7
+                assert page.locator('a[download]').nth(0).get_attribute('href') == '../../../../assets/pdf/notatka-javascript-pelna.pdf'
+                assert page.locator('a[download]').nth(1).get_attribute('href') == '../../../../assets/dokumenty/notatka-javascript-pelna.docx'
             if label == 'geografia':
                 assert page.locator('#courseMain h1').count() > 0
                 assert 'Rolnictwo na świecie' in page.locator('#courseMain').inner_text()

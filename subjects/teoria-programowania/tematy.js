@@ -13,5 +13,18 @@ window.CLASS4I_TEORIA_TOPICS = [
     questions: 109,
     storageKey: 'klasa4i-teoria-metody-v1',
     updated: '2026-10-24'
+  },
+  {
+    id: 'javascript-pelna-notatka',
+    title: 'JavaScript — pełne opracowanie',
+    description: '46 stron teorii i przykładów: od zmiennych i operatorów po tablice, funkcje i wyrażenia regularne. PDF, Word i odnośniki do W3Schools.',
+    subtitle: 'Pełna notatka',
+    category: 'Podstawy i teoria JavaScript',
+    tags: ['46 stron A4', 'PDF + Word', 'W3Schools'],
+    href: 'tematy/javascript-pelna-notatka/index.html',
+    type: 'resource',
+    pages: 46,
+    storageKey: 'klasa4i-teoria-js-pelna-notatka-v1',
+    updated: '2026-11-07'
   }
 ];

@@ -1,0 +1,31 @@
+/* Dodatkowa strona z pełną notatką JavaScript — zachowuje wygląd działu Teoria programowania. */
+.resource-container{max-width:1450px;padding-bottom:68px}
+.resource-hero{position:relative;display:grid;grid-template-columns:1.25fr .75fr;gap:20px;overflow:hidden;min-height:330px;border:1px solid #b9b0ff42;border-radius:23px;background:linear-gradient(125deg,#242440,#252c4c 52%,#1b4d52)}
+.resource-hero:before{content:"";position:absolute;right:-120px;top:-170px;width:560px;height:560px;border:1px solid #c3bfff3b;border-radius:50%;box-shadow:0 0 0 70px #b4b0ff08,0 0 0 140px #8dcbff09}
+.resource-hero-copy{position:relative;z-index:1;padding:37px 42px}
+.resource-hero h1{color:#f7f8ff;font-size:clamp(32px,3.7vw,54px);line-height:1.1;letter-spacing:-2.5px;font-weight:900;margin:20px 0 14px}
+.resource-hero h1 span{color:#c3bfff}
+.resource-hero p{max-width:620px;margin:0 0 23px;color:#bdc7dc;font-size:13px;line-height:1.85}
+.resource-code{align-self:center;position:relative;margin:24px 35px 24px 0;min-height:226px;border:1px solid #cdc8ff66;border-radius:17px;background:#121d36de;box-shadow:0 20px 35px #0005;transform:rotate(1.2deg)}
+.resource-code .code-body{gap:8px;padding:19px;font-size:13px}.resource-code .code-badge{right:-9px;bottom:-11px}
+.resource-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0 43px}
+.resource-stats>div{display:flex;align-items:center;gap:12px;min-height:78px;padding:16px 19px;border:1px solid var(--border);border-radius:15px;background:var(--panel)}
+.resource-stats strong{font-size:25px;line-height:1;color:var(--text);font-weight:900}.resource-stats span{font-size:11px;color:var(--muted)}
+.resource-section{margin:0 0 42px;scroll-margin-top:25px}
+.resource-download-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.resource-download-card{display:flex;align-items:center;gap:13px;min-width:0;padding:18px;border:1px solid var(--border);border-radius:16px;background:var(--panel)}
+.resource-file-icon{display:grid;place-items:center;flex:0 0 48px;height:54px;border-radius:12px;font-size:11px;font-weight:950;letter-spacing:.4px}
+.pdf-icon{background:#e45c5c20;color:#ff9c9c}.docx-icon{background:#5e9fe524;color:#a7caff}
+.resource-download-copy{flex:1;min-width:0}.resource-download-copy strong{display:block;font-size:13px;line-height:1.45}.resource-download-copy p{margin:5px 0;color:var(--muted);font-size:11px;line-height:1.6}.resource-download-copy span{color:var(--quiet);font-size:10px}
+.resource-download-button{flex:none;display:inline-flex;align-items:center;justify-content:center;padding:10px 12px;border-radius:9px;background:var(--mint);color:#102a2a;font-size:11px;font-weight:900;white-space:nowrap}.resource-download-button:hover{filter:brightness(1.07)}.secondary-download{background:var(--panel2);border:1px solid var(--strong-border);color:var(--text)}
+.resource-topics-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.resource-topics-grid article{display:flex;gap:12px;min-width:0;padding:16px;border:1px solid var(--border);border-radius:14px;background:var(--panel)}
+.resource-topics-grid article>span{display:grid;place-items:center;flex:none;width:33px;height:33px;border-radius:9px;background:#a99fff1c;color:var(--lav);font-size:10px;font-weight:900}
+.resource-topics-grid h3{font-size:13px;margin:1px 0 5px}.resource-topics-grid p{font-size:11px;line-height:1.65;color:var(--muted);margin:0}.resource-topics-grid code{color:var(--lav);font-size:10px}
+.resource-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.resource-links a{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:13px 15px;border:1px solid var(--border);border-radius:11px;background:var(--panel);font-size:12px;font-weight:750}.resource-links a:hover{border-color:var(--lav);color:var(--lav)}.resource-links b{color:var(--mint);font-size:16px}
+.resource-pdf-frame{overflow:hidden;border:1px solid var(--border);border-radius:15px;background:var(--panel);height:min(1000px,105vh)}.resource-pdf-frame iframe{display:block;width:100%;height:100%;border:0;background:#fff}.resource-pdf-fallback{margin:8px 0;color:var(--muted);font-size:10px}
+.resource-back{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--border)}.resource-back a{font-size:11px;font-weight:800;color:var(--mint)}.resource-back a:hover{text-decoration:underline}
+@media(max-width:1000px){.resource-hero{grid-template-columns:1.1fr .9fr}.resource-hero-copy{padding:31px}.resource-code{margin-right:24px}.resource-topics-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.resource-download-grid{grid-template-columns:1fr}}
+@media(max-width:760px){.resource-hero{display:block;min-height:0}.resource-hero-copy{padding:31px 25px 35px}.resource-hero h1{font-size:clamp(34px,8.5vw,48px);letter-spacing:-2px}.resource-hero p{font-size:12px}.resource-code{display:none}.resource-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:34px}.resource-stats>div{padding:13px;min-height:67px}.resource-stats strong{font-size:22px}.resource-stats span{font-size:10px}.resource-topics-grid{grid-template-columns:1fr}.resource-links{grid-template-columns:1fr}.resource-download-card{flex-wrap:wrap;align-items:flex-start}.resource-download-copy{flex:1 1 calc(100% - 64px)}.resource-download-button{margin-left:61px}.resource-pdf-frame{height:75vh;min-height:460px}.resource-back{display:grid}}
+@media(max-width:420px){.resource-hero-copy{padding:27px 19px}.resource-hero .hero-actions{display:grid}.resource-hero .action{width:100%}.resource-download-card{padding:14px}.resource-download-button{margin-left:0;width:100%}.resource-stats>div{display:block}.resource-stats span{display:block;margin-top:6px}}

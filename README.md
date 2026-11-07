@@ -94,12 +94,20 @@ Zakres lekcji: podzapytania zwykłe i skorelowane; `IN`, `NOT IN`, `EXISTS` i `N
 
 ## Poprawka laboratorium SQL — 05.11.2026
 
-Jeśli laboratorium nie może pobrać silnika, zaktualizuj pliki `sw.js`, `subjects/systemy-baz-danych/tematy/zapytania-zagniezdzone-zlaczenia-widoki/js/app.js` i `.../js/sql-worker.js`. Nowy worker próbuje kilku źródeł SQL.js (jsDelivr, cdnjs i unpkg, z zapasową wersją 1.14.2), a ekran laboratorium pokazuje dokładniejszy błąd i przycisk ponowienia. Zmieniono nazwę cache Service Workera na `klasa4i-v9-sql-fallback-20261105`, aby przeglądarka pobrała nową wersję. Po wgraniu zmian otwórz stronę i wykonaj twarde odświeżenie (`Ctrl + Shift + R`).
+Jeśli laboratorium nie może pobrać silnika, zaktualizuj pliki `sw.js`, `subjects/systemy-baz-danych/tematy/zapytania-zagniezdzone-zlaczenia-widoki/js/app.js` i `.../js/sql-worker.js`. Nowy worker próbuje kilku źródeł SQL.js (jsDelivr, cdnjs i unpkg, z zapasową wersją 1.14.2), a ekran laboratorium pokazuje dokładniejszy błąd i przycisk ponowienia. W poprawce laboratorium z 05.11.2026 zmieniono nazwę cache na `klasa4i-v9-sql-fallback-20261105`. W aktualizacji z 07.11.2026 aktualna nazwa cache to `klasa4i-v10-javascript-notes-20261107`, aby przeglądarka pobrała także nowe pliki notatki JavaScript. Po wgraniu zmian otwórz stronę i wykonaj twarde odświeżenie (`Ctrl + Shift + R`).
+
+
+## NOWOŚĆ 07.11.2026: Teoria programowania — pełne opracowanie JavaScript
+
+W katalogu **Teoria programowania** dodano drugi, osobny materiał: **JavaScript — pełne opracowanie**. To 46-stronicowa notatka A4 z podstawami języka, zmiennymi i typami danych, operatorami, instrukcjami warunkowymi, pętlami, tablicami, stringami, funkcjami oraz wyrażeniami regularnymi. Strona tematu udostępnia plik PDF do czytania i drukowania, edytowalny DOCX oraz podgląd dokumentu. Dodano również odnośniki do odpowiednich lekcji W3Schools.
+
+Dotychczasowy temat **Metody obiektów: Math, Array, String** pozostaje bez zmian — nadal ma 109 metod, fiszki, kartkówkę, laboratorium i własny klucz postępu `klasa4i-teoria-metody-v1`. Nowa notatka jest oddzielną kartą i nie nadpisuje zapisu poprzedniego tematu.
 
 ## Co jest dostępne
 
 - **Strona główna** `index.html`: wybór przedmiotu, wyszukiwarka przedmiotów, statystyki i postęp.
 - **Witryny i aplikacje internetowe → Protokoły HTTP/HTTPS i aplikacje internetowe**: dotychczasowy pełny kurs — 23 lekcje, 57 fiszek, 66 pytań, quiz, egzamin, 8 laboratoriów HTML/CSS/JS, słownik, notatki, historia wyników i postępy.
+- **Teoria programowania → JavaScript — pełne opracowanie**: 46-stronicowa notatka A4 z teorią i przykładami, dostępna jako PDF i edytowalny Word, z podglądem na stronie i odnośnikami do W3Schools.
 - **Teoria programowania → Metody obiektów: Math, Array, String**: 109 metod (34 Math, 40 Array, 35 String), wyszukiwanie, przykłady argumentów i typów, 109 fiszek, losowa kartkówka w postaci czterokolumnowej tabeli z samodzielnym ocenianiem, statystyki, historia wyników i eksport/import danych.
 - **Geografia → Rolnictwo na świecie**: 12 lekcji, 36 fiszek, 24 pytania quizowe, w tym dział o lasach dołączony w przesłanych notatkach.
 - **Systemy baz danych → Zapytania zagnieżdżone, złączenia, widoki**: 5 lekcji, 24 fiszki, 20 pytań quizowych, 8 tabel ćwiczeniowych, gotowe kwerendy i Laboratorium SQL z silnikiem SQLite działającym w przeglądarce.

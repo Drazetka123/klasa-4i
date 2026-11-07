@@ -1,5 +1,5 @@
 /* Offline cache dla platformy Klasa 4i. Zwiększ CACHE_NAME przy każdym wydaniu. */
-const CACHE_NAME = 'klasa4i-v9-sql-fallback-20261105';
+const CACHE_NAME = 'klasa4i-v10-javascript-notes-20261107';
 const SQL_CDNS = [
   'https://cdn.jsdelivr.net/npm/sql.js@1.15.2/dist/',
   'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.15.2/',
@@ -11,6 +11,8 @@ const CORE = [
   './', './index.html', './css/portal.css', './js/portal.js', './subjects/catalog.js',
   './assets/pdf/notatki-geografia-rolnictwo-i-lesnictwo.pdf',
   './assets/pdf/notatki-systemy-baz-danych.pdf',
+  './assets/pdf/notatka-javascript-pelna.pdf',
+  './assets/dokumenty/notatka-javascript-pelna.docx',
   './subjects/witryny/tematy.js',
   './subjects/witryny/', './subjects/witryny/index.html',
   './subjects/witryny/tematy.js', './subjects/witryny/js/topics.js', './subjects/witryny/css/topics.css',
@@ -27,6 +29,9 @@ const CORE = [
   './subjects/teoria-programowania/tematy/metody-math-array-string/js/app.js',
   './subjects/teoria-programowania/tematy/metody-math-array-string/js/lab.js',
   './subjects/teoria-programowania/tematy/metody-math-array-string/css/lab.css',
+  './subjects/teoria-programowania/tematy/javascript-pelna-notatka/index.html',
+  './subjects/teoria-programowania/tematy/javascript-pelna-notatka/css/resource.css',
+  './subjects/teoria-programowania/tematy/javascript-pelna-notatka/js/resource.js',
   './subjects/geografia/index.html', './subjects/geografia/tematy.js',
   './subjects/geografia/css/topics.css', './subjects/geografia/js/topics.js',
   './subjects/geografia/tematy/rolnictwo-na-swiecie/index.html',
@@ -115,9 +120,11 @@ self.addEventListener('fetch', event => {
               ? './subjects/geografia/tematy/rolnictwo-na-swiecie/index.html'
               : path.includes('/subjects/geografia/')
                 ? './subjects/geografia/index.html'
-                : path.includes('/subjects/teoria-programowania/tematy/')
-                  ? './subjects/teoria-programowania/tematy/metody-math-array-string/index.html'
-                  : path.includes('/subjects/teoria-programowania/')
+                : path.includes('/subjects/teoria-programowania/tematy/javascript-pelna-notatka/')
+                  ? './subjects/teoria-programowania/tematy/javascript-pelna-notatka/index.html'
+                  : path.includes('/subjects/teoria-programowania/tematy/')
+                    ? './subjects/teoria-programowania/tematy/metody-math-array-string/index.html'
+                    : path.includes('/subjects/teoria-programowania/')
                     ? './subjects/teoria-programowania/index.html'
                     : path.includes('/subjects/witryny/tematy/')
                       ? './subjects/witryny/tematy/protokoly-http-https-i-aplikacje-internetowe/index.html'

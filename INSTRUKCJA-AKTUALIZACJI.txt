@@ -1,0 +1,25 @@
+AKTUALIZACJA KLASY 4I — PEŁNA NOTATKA JAVASCRIPT
+
+Co dodaje aktualizacja?
+- Nową kartę „JavaScript — pełne opracowanie” w przedmiocie Teoria programowania.
+- Stronę materiału z podglądem PDF.
+- Pobieranie notatki w PDF i edytowalnym DOCX.
+- Linki do lekcji W3Schools.
+- Aktualizację Service Workera, żeby nowe pliki były dostępne także po zapisaniu strony offline.
+
+Jak wgrać na istniejącą stronę GitHub Pages?
+1. Pobierz i rozpakuj ZIP.
+2. Otwórz folder, w którym masz swoje istniejące repozytorium Klasa 4i.
+3. Skopiuj do niego CAŁĄ zawartość rozpakowanej paczki, zachowując strukturę katalogów.
+4. Potwierdź zastąpienie plików, gdy Windows lub GitHub o to zapyta.
+5. Nie usuwaj starych folderów ani materiałów. Aktualizacja dodaje nowy temat obok starego.
+6. Zapisz zmiany w repozytorium (Commit changes) i poczekaj, aż GitHub Pages opublikuje stronę.
+7. Otwórz: Teoria programowania → JavaScript — pełne opracowanie.
+
+W razie wyświetlania starej wersji strony wykonaj twarde odświeżenie Ctrl + Shift + R albo zamknij i ponownie otwórz stronę.
+
+Ważne:
+- Istniejący temat „Metody obiektów: Math, Array, String” pozostaje na stronie.
+- Nie zmieniam klucza postępów starego tematu; zapisane fiszki i wyniki nie powinny zostać utracone.
+- Nowy materiał zawiera 46-stronicowy PDF i edytowalny plik Word.
+- Aby korzystać z pobierania i podglądu offline, otwórz stronę przynajmniej raz z Internetem, żeby Service Worker zapisał nowe pliki.
