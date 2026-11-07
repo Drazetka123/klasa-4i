@@ -21,7 +21,7 @@
       ? `<span>▤ ${Number(topic.pages) || 0} stron</span><span>↓ PDF + Word</span><span>↗ W3Schools</span>`
       : `<span>▤ ${lessons} działów</span><span>◈ ${Number(topic.flashcards) || 0} fiszek</span><span>◉ ${Number(topic.questions) || 0} pytań</span>`;
     const bottom = isResource
-      ? `<div class="topic-card-bottom topic-resource-bottom"><div><span>Pełne opracowanie do czytania i pobrania</span><strong>Otwórz materiały <span aria-hidden="true">→</span></strong></div><span class="resource-format-pill">PDF / DOCX</span></div>`
+      ? `<div class="topic-card-bottom topic-resource-bottom"><div><span>Dwie wersje notatki do czytania i pobrania</span><strong>Otwórz materiały <span aria-hidden="true">→</span></strong></div><span class="resource-format-pill">PDF / DOCX</span></div>`
       : `<div class="topic-card-bottom"><div class="topic-progress-label"><span>Twój postęp</span><strong>${pct}%</strong></div><div class="topic-meter" role="progressbar" aria-label="Ukończone lekcje w temacie ${esc(topic.title)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><span style="width:${pct}%"></span></div><div class="topic-card-foot"><span>${done} / ${lessons} działów</span><strong>${done > 0 ? 'Kontynuuj naukę' : 'Rozpocznij naukę'} <span aria-hidden="true">→</span></strong></div></div>`;
     return `<a class="topic-card${isResource ? ' topic-card-resource' : ''}" href="${safeUrl(topic.href)}" aria-label="Otwórz temat: ${esc(topic.title)}">
       <div class="topic-card-top"><span class="topic-index">${String(index + 1).padStart(2, '0')}</span><span class="topic-label">${esc(topic.subtitle || 'Sprawdzian')}</span><span class="topic-arrow" aria-hidden="true">↗</span></div>

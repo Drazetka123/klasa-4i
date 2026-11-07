@@ -1,5 +1,5 @@
 /* Offline cache dla platformy Klasa 4i. Zwiększ CACHE_NAME przy każdym wydaniu. */
-const CACHE_NAME = 'klasa4i-v10-javascript-notes-20261107';
+const CACHE_NAME = 'klasa4i-v11-javascript-basic-expanded-20261107';
 const SQL_CDNS = [
   'https://cdn.jsdelivr.net/npm/sql.js@1.15.2/dist/',
   'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.15.2/',
@@ -11,6 +11,8 @@ const CORE = [
   './', './index.html', './css/portal.css', './js/portal.js', './subjects/catalog.js',
   './assets/pdf/notatki-geografia-rolnictwo-i-lesnictwo.pdf',
   './assets/pdf/notatki-systemy-baz-danych.pdf',
+  './assets/pdf/notatka-javascript-podstawowa.pdf',
+  './assets/dokumenty/notatka-javascript-podstawowa.docx',
   './assets/pdf/notatka-javascript-pelna.pdf',
   './assets/dokumenty/notatka-javascript-pelna.docx',
   './subjects/witryny/tematy.js',

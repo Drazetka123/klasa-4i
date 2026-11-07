@@ -17,6 +17,23 @@
     setTheme();
   });
   setTheme();
+
+  const previewFrame = document.getElementById('notePreviewFrame');
+  const openPreviewPdf = document.getElementById('openPreviewPdf');
+  const previewDescription = document.getElementById('previewDescription');
+  const previewButtons = Array.from(document.querySelectorAll('[data-preview-pdf]'));
+  previewButtons.forEach(previewButton => {
+    previewButton.addEventListener('click', () => {
+      const pdfPath = previewButton.dataset.previewPdf;
+      const label = previewButton.dataset.previewLabel || 'wybraną notatkę';
+      if (!pdfPath || !previewFrame) return;
+      previewFrame.src = `${pdfPath}#view=FitH`;
+      previewFrame.title = `Podgląd: ${label}`;
+      if (openPreviewPdf) openPreviewPdf.href = pdfPath;
+      if (previewDescription) previewDescription.textContent = `Podgląd pokazuje teraz ${label}. Możesz przewijać dokument lub otworzyć go w osobnej karcie.`;
+      previewButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.previewPdf === pdfPath)));
+    });
+  });
   if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
     window.addEventListener('load', () => navigator.serviceWorker.register('../../../../sw.js').catch(() => {}));
   }

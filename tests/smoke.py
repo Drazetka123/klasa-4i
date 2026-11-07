@@ -68,6 +68,19 @@ THEORY = inline('subjects/teoria-programowania/tematy/metody-math-array-string/i
 JS_RESOURCE = inline('subjects/teoria-programowania/tematy/javascript-pelna-notatka/index.html',
                      ['../../../../css/portal.css', '../metody-math-array-string/css/methods.css', 'css/resource.css'],
                      ['js/resource.js'])
+# Do not launch Chromium's built-in PDF viewer during the UI smoke test.
+# The real file links are checked in check_static.py; here only the preview switch is tested.
+JS_RESOURCE = JS_RESOURCE.replace(
+    'src="../../../../assets/pdf/notatka-javascript-pelna.pdf#view=FitH"',
+    'src="about:blank"'
+)
+JS_RESOURCE = JS_RESOURCE.replace(
+    'data-preview-pdf="../../../../assets/pdf/notatka-javascript-podstawowa.pdf"',
+    'data-preview-pdf="about:blank?note=basic"'
+).replace(
+    'data-preview-pdf="../../../../assets/pdf/notatka-javascript-pelna.pdf"',
+    'data-preview-pdf="about:blank?note=expanded"'
+)
 GEO = inline('subjects/geografia/tematy/rolnictwo-na-swiecie/index.html',
              ['../../../../css/course-template.css'], ['data.js', '../../../../js/course-template.js'])
 SBD = inline('subjects/systemy-baz-danych/tematy/zapytania-zagniezdzone-zlaczenia-widoki/index.html',
@@ -91,7 +104,7 @@ with sync_playwright() as p:
                 pass
             errors = []
             page.on('pageerror', lambda error: errors.append(str(error)))
-            page.set_content(html, wait_until='load')
+            page.set_content(html, wait_until='domcontentloaded')
             assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth'), f'Overflow {label} at {width}px'
             if label == 'portal':
                 assert page.locator('.subject-card').count() == 4
@@ -120,21 +133,31 @@ with sync_playwright() as p:
             if label == 'teoria-tematy':
                 assert page.locator('.topic-card').count() == 2
                 assert 'Metody obiektów: Math, Array, String' in page.locator('.topic-card').first.inner_text()
-                assert 'JavaScript — pełne opracowanie' in page.locator('.topic-card').nth(1).inner_text()
+                assert 'JavaScript — notatki: podstawowa i rozszerzona' in page.locator('.topic-card').nth(1).inner_text()
                 assert page.locator('.topic-card').nth(1).get_attribute('href') == 'tematy/javascript-pelna-notatka/index.html'
-                assert '46 stron' in page.locator('.topic-card').nth(1).inner_text()
+                assert 'Podstawowa · 13 stron' in page.locator('.topic-card').nth(1).inner_text()
+                assert 'Rozszerzona · 46 stron' in page.locator('.topic-card').nth(1).inner_text()
+                assert '59 stron' in page.locator('.topic-card').nth(1).inner_text()
             if label == 'metody':
                 assert page.locator('#allCount').inner_text() == '109'
                 page.evaluate("document.querySelector('[data-view=\"lab\"]').click()")
                 page.wait_for_timeout(40)
                 assert page.locator('#labCode').count() == 1
             if label == 'javascript-resource':
-                assert page.locator('h1').inner_text().replace('\n', ' ') == 'JavaScript: pełne opracowanie.'
+                assert page.locator('h1').inner_text().replace('\n', ' ') == 'JavaScript: dwie wersje notatki.'
                 assert page.locator('a[download]').count() == 4
-                assert page.locator('iframe[title=\"Podgląd pełnej notatki JavaScript\"]').count() == 1
+                assert page.locator('iframe[title=\"Podgląd rozszerzonej notatki JavaScript — 46 stron\"]').count() == 1
                 assert page.locator('a[href^=\"https://www.w3schools.com/js/\"]').count() >= 7
-                assert page.locator('a[download]').nth(0).get_attribute('href') == '../../../../assets/pdf/notatka-javascript-pelna.pdf'
-                assert page.locator('a[download]').nth(1).get_attribute('href') == '../../../../assets/dokumenty/notatka-javascript-pelna.docx'
+                assert page.locator('a[download]').nth(0).get_attribute('href') == '../../../../assets/pdf/notatka-javascript-podstawowa.pdf'
+                assert page.locator('a[download]').nth(1).get_attribute('href') == '../../../../assets/dokumenty/notatka-javascript-podstawowa.docx'
+                assert page.locator('a[download]').nth(2).get_attribute('href') == '../../../../assets/pdf/notatka-javascript-pelna.pdf'
+                assert page.locator('a[download]').nth(3).get_attribute('href') == '../../../../assets/dokumenty/notatka-javascript-pelna.docx'
+                page.locator('.resource-version-preview').first.click()
+                assert page.locator('#notePreviewFrame').get_attribute('src').endswith('about:blank?note=basic#view=FitH')
+                assert page.locator('.resource-preview-switch button').first.get_attribute('aria-pressed') == 'true'
+                assert page.locator('.resource-preview-switch button').nth(1).get_attribute('aria-pressed') == 'false'
+                page.locator('.resource-preview-switch button').nth(1).click()
+                assert page.locator('#notePreviewFrame').get_attribute('src').endswith('about:blank?note=expanded#view=FitH')
             if label == 'geografia':
                 assert page.locator('#courseMain h1').count() > 0
                 assert 'Rolnictwo na świecie' in page.locator('#courseMain').inner_text()

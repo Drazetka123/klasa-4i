@@ -107,7 +107,7 @@ print('PASS all SQL presets execute; INNER=2, LEFT=5, FULL=8, CROSS=25')
 
 # Offline cache, preserved learning storage keys and required assets.
 sw = (root/'sw.js').read_text(encoding='utf-8')
-assert 'klasa4i-v10-javascript-notes-20261107' in sw
+assert 'klasa4i-v11-javascript-basic-expanded-20261107' in sw
 core_block = re.search(r'const CORE = \[(.*?)\];', sw, re.S).group(1)
 core_assets = re.findall(r"'([^']+)'", core_block)
 for asset in core_assets:
@@ -120,6 +120,8 @@ for asset in [
     'subjects/systemy-baz-danych/tematy/zapytania-zagniezdzone-zlaczenia-widoki/css/sbd.css',
     'assets/pdf/notatki-geografia-rolnictwo-i-lesnictwo.pdf',
     'assets/pdf/notatki-systemy-baz-danych.pdf',
+    'assets/pdf/notatka-javascript-podstawowa.pdf',
+    'assets/dokumenty/notatka-javascript-podstawowa.docx',
     'assets/pdf/notatka-javascript-pelna.pdf',
     'assets/dokumenty/notatka-javascript-pelna.docx',
     'subjects/teoria-programowania/tematy/javascript-pelna-notatka/index.html',
@@ -137,16 +139,19 @@ assert 'klasa4i-teoria-metody-v1' in theory_app
 assert 'witryny-lab-v1' in witryny_data
 print('PASS offline files + existing progress keys unchanged')
 
-# New full JavaScript resource topic is available alongside the existing 109-method course.
+# The JavaScript resource topic offers both the 13-page basic note and 46-page expanded note.
 theory_catalog = (root/'subjects'/'teoria-programowania'/'tematy.js').read_text(encoding='utf-8')
 assert "id: 'metody-math-array-string'" in theory_catalog
 assert "id: 'javascript-pelna-notatka'" in theory_catalog
 assert "type: 'resource'" in theory_catalog
+assert "pages: 59" in theory_catalog
 assert "href: 'tematy/javascript-pelna-notatka/index.html'" in theory_catalog
 resource_dir = root/'subjects'/'teoria-programowania'/'tematy'/'javascript-pelna-notatka'
 resource_html = (resource_dir/'index.html').read_text(encoding='utf-8')
-for text in ['JavaScript:', 'pełne opracowanie', 'W3Schools', 'Pobierz PDF', 'Wersja Word', 'Podgląd pełnej notatki JavaScript']:
+for text in ['JavaScript:', 'dwie wersje notatki', 'WERSJA PODSTAWOWA', 'WERSJA ROZSZERZONA', '13 stron A4', '46 stron A4', 'Pobierz PDF', 'Pobierz Word', 'notePreviewFrame', 'W3Schools']:
     assert text in resource_html
+assert (root/'assets'/'pdf'/'notatka-javascript-podstawowa.pdf').stat().st_size > 250_000
+assert (root/'assets'/'dokumenty'/'notatka-javascript-podstawowa.docx').stat().st_size > 45_000
 assert (root/'assets'/'pdf'/'notatka-javascript-pelna.pdf').stat().st_size > 500_000
 assert (root/'assets'/'dokumenty'/'notatka-javascript-pelna.docx').stat().st_size > 30_000
 for url in ['https://www.w3schools.com/js/default.asp', 'https://www.w3schools.com/js/js_array_methods.asp', 'https://www.w3schools.com/js/js_regexp.asp']:
@@ -154,7 +159,11 @@ for url in ['https://www.w3schools.com/js/default.asp', 'https://www.w3schools.c
 assert 'klasa4i-teoria-metody-v1' in theory_app
 assert 'klasa4i-teoria-js-pelna-notatka-v1' in theory_catalog
 assert './subjects/teoria-programowania/tematy/javascript-pelna-notatka/index.html' in core_block
-assert './assets/pdf/notatka-javascript-pelna.pdf' in core_block
-assert './assets/dokumenty/notatka-javascript-pelna.docx' in core_block
-print('PASS JavaScript full-notes topic, PDF/DOCX, W3Schools links and offline cache')
-
+for asset in [
+    './assets/pdf/notatka-javascript-podstawowa.pdf',
+    './assets/dokumenty/notatka-javascript-podstawowa.docx',
+    './assets/pdf/notatka-javascript-pelna.pdf',
+    './assets/dokumenty/notatka-javascript-pelna.docx'
+]:
+    assert asset in core_block
+print('PASS JavaScript basic + expanded notes, PDF/DOCX, W3Schools links and offline cache')

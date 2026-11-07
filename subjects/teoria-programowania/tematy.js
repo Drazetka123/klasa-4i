@@ -16,14 +16,14 @@ window.CLASS4I_TEORIA_TOPICS = [
   },
   {
     id: 'javascript-pelna-notatka',
-    title: 'JavaScript — pełne opracowanie',
-    description: '46 stron teorii i przykładów: od zmiennych i operatorów po tablice, funkcje i wyrażenia regularne. PDF, Word i odnośniki do W3Schools.',
-    subtitle: 'Pełna notatka',
+    title: 'JavaScript — notatki: podstawowa i rozszerzona',
+    description: 'Dwie wersje do wyboru: uporządkowana notatka podstawowa (13 stron) oraz bardzo rozbudowane opracowanie (46 stron). Obie w PDF i Wordzie, dodatkowo materiały W3Schools.',
+    subtitle: 'Dwie wersje notatki',
     category: 'Podstawy i teoria JavaScript',
-    tags: ['46 stron A4', 'PDF + Word', 'W3Schools'],
+    tags: ['Podstawowa · 13 stron', 'Rozszerzona · 46 stron', 'PDF + Word', 'W3Schools'],
     href: 'tematy/javascript-pelna-notatka/index.html',
     type: 'resource',
-    pages: 46,
+    pages: 59,
     storageKey: 'klasa4i-teoria-js-pelna-notatka-v1',
     updated: '2026-11-07'
   }
